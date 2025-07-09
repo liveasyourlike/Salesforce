@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="Contact Locator">
+        <div class="slds-m-around_medium">
+            <lightning-input label="Search Contacts" type="search" onchange={handleSearchTermChange} value={searchTerm} debounce-by="300"></lightning-input>
+
+            <template if:true={contacts}>
+                <template if:true={hasContacts}>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={contacts}
+                        columns={columns}
+                        hide-checkbox-column="true">
+                    </lightning-datatable>
+                </template>
+                <template if:false={hasContacts}>
+                    <p class="slds-text-align_center slds-m-vertical_large">No contacts found.</p>
+                </template>
+            </template>
+            <template if:true={error}>
+                <p class="slds-text-color_error slds-m-vertical_large">{error.body.message}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
